@@ -1,0 +1,29 @@
+version: "0.1"
+
+networks:
+  net:
+    driver: bridge
+
+services:
+  vectordb:
+    image: chromadb/chroma
+    ports:
+      - 8000:8000
+    networks:
+      - net
+
+  cdcbot:
+    container_name: cdcbot
+    build: .
+    ports:
+      - 8501:8501
+    volumes:
+      - .:/cdc_chatbot
+    networks:
+      - net
+    depends_on:
+      - vectordb
+    restart: always
+    environment:
+      - CHROMA_HOST=vectordb
+      - CHROMA_PORT=8000
