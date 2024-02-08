@@ -1,6 +1,7 @@
 # CDC-Chatbot
 
 A sample chatbot showcasing RAG pipeline on CDC dataset.
+![Interface](https://github.com/Cyber-Machine/CDC-Chatbot/assets/60005585/7588cae2-5275-47c4-ab12-eb7672cf4998)
 
 ## Getting Started
 
@@ -52,3 +53,12 @@ Start the application using Docker Compose
 ```bash
 docker compose up
 ```
+
+## Examples and Experimentations
+
+Also checkout answers from RAG bot [here](EXAMPLES.md).
+and few experimentations done [here](EXPERIMENTS.md).
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
