@@ -1,6 +1,7 @@
 import streamlit as st
 
 from cdc_bot.ingest import get_index
+from cdc_bot.prompts import refine_template, text_qa_template
 
 st.header("Chat with the CDC Dataset💬 📚")
 if "messages" not in st.session_state.keys():
@@ -20,7 +21,9 @@ def load_data():
 
 index = load_data()
 
-chat_engine = index.as_chat_engine(chat_mode="context", verbose=True)
+query_engine = index.as_query_engine(
+    text_qa_template=text_qa_template, refine_template=refine_template
+)
 
 if prompt := st.chat_input("Your question"):
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -33,7 +36,7 @@ for message in st.session_state.messages:
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = chat_engine.chat(prompt)
+            response = query_engine.query(prompt)
             st.write(response.response)
             message = {"role": "assistant", "content": response.response}
             st.session_state.messages.append(message)

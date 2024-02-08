@@ -23,6 +23,10 @@ def get_index():
         base_url=TRUEFOUNDRY_BASE_URL,
         model=TRUEFOUNDRY_MODEL,
         api_key=TRUEFOUNDRY_API_KEY,
+        temperature=0.7,
+        top_p=1.14,
+        top_k=60,
+        max_tokens=650,
     )
     embed_model = HuggingFaceEmbedding(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
