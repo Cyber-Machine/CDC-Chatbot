@@ -1,6 +1,7 @@
 FROM python:3.9-slim
 
 LABEL maintainer=“maazkarim02@gmail.com”
+LABEL org.opencontainers.image.source=https://github.com/Cyber-Machine/CDC-Chatbot
 
 ARG POETRY_VERSION="1.5.1"
 
