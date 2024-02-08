@@ -7,6 +7,8 @@ from llama_index.vector_stores import ChromaVectorStore
 
 from cdc_bot.constants import (
     CHROMA_COLLECTION_NAME,
+    CHROMA_HOST,
+    CHROMA_PORT,
     DOCS_PATH,
     TRUEFOUNDRY_API_KEY,
     TRUEFOUNDRY_BASE_URL,
@@ -16,7 +18,7 @@ from cdc_bot.llm import TrueFoundry
 
 
 def get_index():
-    client = chromadb.HttpClient()
+    client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
     llm = TrueFoundry(
         base_url=TRUEFOUNDRY_BASE_URL,
         model=TRUEFOUNDRY_MODEL,
@@ -29,7 +31,7 @@ def get_index():
 
     try:
         collection = client.get_collection(name=CHROMA_COLLECTION_NAME)
-    except ValueError:
+    except:
         print("Ingesting document")
         return ingest(
             chroma_client=client,
